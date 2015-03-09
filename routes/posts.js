@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
   Post.find(function(err, posts) {
     if (err) res.send(err);
 
-    res.json(posts);
+    res.render('post/index', {posts: posts});
   });
 });
 
@@ -26,13 +26,13 @@ router.get('/', function(req, res) {
 router.get('/new', function(req, res) {
   console.log('NEW POST');
 
-  res.json({ message: "NEW PAGE" });
+  res.render('post/new');
 });
 
 /* CREATE */
 router.post('/new', function(req, res) {
   console.log('CREATE POST');
-
+  console.log(req);
   Post.findById(req.params.post_id, function(err, post) {
     if (err) res.send(err);
 
@@ -43,7 +43,7 @@ router.post('/new', function(req, res) {
     post.save(function(err) {
       if (err) res.send(err);
 
-      res.json({ message: 'successfully created!' });
+      res.redirect('/posts/' + post._id);
     });
   });
 });
@@ -55,7 +55,7 @@ router.get('/:post_id', function(req, res) {
   Post.findById(req.params.post_id, function(err, post) {
     if (err) res.send(err);
 
-    res.json(post);
+    res.render('post/show', {post: post});
   });
 });
 
