@@ -8,7 +8,7 @@ var mongoose     = require('mongoose');
 
 var routes = require('./routes/index');
 var users  = require('./routes/users');
-var api    = require('./routes/api');
+var posts  = require('./routes/posts');
 var app    = express();
 
 // view engine setup
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api', api);
+app.use('/posts', posts);
 
 
 mongoose.connect('mongodb://localhost:27017/simple_blog');
